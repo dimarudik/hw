@@ -4,5 +4,5 @@ import com.example.hw2.exception.AccountExistsException;
 
 public interface ILoginService<T> {
 
-    void registerNewUserAccount(T t) throws AccountExistsException;
+    boolean registerNewUserAccount(T t);
 }

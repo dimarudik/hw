@@ -92,14 +92,12 @@
                 <td><input type="text" placeholder="size (pages)" th:field="*{size}"></td>
                 <td><input type="submit" value="Filter"></td>
             </tr>
-<!--
             <tr>
-                <td><span th:if="${#fields.hasErrors('author')}">Author is empty!</span></td>
-                <td><span th:if="${#fields.hasErrors('title')}">Title is empty!</span></td>
+                <td></td>
+                <td></td>
                 <td><span th:if="${#fields.hasErrors('size')}">Format: 9999!</span></td>
                 <td></td>
             </tr>
--->
         </table>
     </form>
 
@@ -127,6 +125,11 @@
             </tr>
         </table>
     </form>
+    <table>
+        <tr th:each="file : ${fileList}">
+            <td><a th:href="@{'download/' + ${file.name}}"><span th:text="${file.name}"></span></a></td>
+        </tr>
+    </table>
 
     <hr>
     <p>Click <a th:href="@{/}">here</a> to main page</p>

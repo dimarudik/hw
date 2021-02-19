@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <title>Custom Handler</title>
+    <style>
+        hr {
+            display: block;
+            position: relative;
+            padding: 0;
+            margin: 8px auto;
+            height: 0;
+            width: 100%;
+            max-height: 0;
+            font-size: 1px;
+            line-height: 0;
+            clear: both;
+            border: none;
+            border-top: 1px solid #aaaaaa;
+            border-bottom: 1px solid #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <h1 th:text="${errorMessage}">Custom Book Shelf 404</h1>
+    <hr>
+    <p>Click <a th:href="@{/book}">here</a> to proceed</p>
+    <p>Click <a th:href="@{/}">here</a> to main page</p>
+</body>
+</html>

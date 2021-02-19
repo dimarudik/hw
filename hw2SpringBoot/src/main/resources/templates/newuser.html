@@ -22,6 +22,7 @@
     </style>
 </head>
 <body>
+    <h1 th:text="${errorMessage}">Custom Book Shelf 404</h1>
     <form method="post" th:action="@{/new}" th:object="${loginForm}">
         <table>
             <tr>
