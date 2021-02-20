@@ -2,6 +2,8 @@ package com.example.hw2.service;
 
 import java.util.List;
 
+//TODO комментарии к методам внутри интерфейса,
+// уберите неиспользуемый иморт
 public interface IBookService<T,Y> {
 
     List<T> getAll();

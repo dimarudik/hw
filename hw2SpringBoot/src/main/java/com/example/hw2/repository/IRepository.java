@@ -4,6 +4,8 @@ import com.example.hw2.model.Book;
 
 import java.util.List;
 
+//TODO комментарии к методам внутри интерфейса,
+// уберите неиспользуемый иморт
 public interface IRepository<T> {
 
     List<T> getAll();

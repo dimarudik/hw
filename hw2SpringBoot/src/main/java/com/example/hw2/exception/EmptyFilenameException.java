@@ -1,5 +1,6 @@
 package com.example.hw2.exception;
 
+//TODO добавьте описание класса что делает
 public class EmptyFilenameException extends Exception{
 
     private final String message;

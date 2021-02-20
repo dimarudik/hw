@@ -12,7 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 /*
 https://www.codejava.net/frameworks/spring-boot/spring-boot-error-handling-guide
 */
-
+//TODO добавьте комментарии (включая ссылку, описать)
+// строки сообщений в константы
 @Controller
 public class CustomErrorController implements ErrorController {
 

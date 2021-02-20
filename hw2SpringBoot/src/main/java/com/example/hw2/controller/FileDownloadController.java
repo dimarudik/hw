@@ -10,9 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.URLConnection;
 
+//TODO rest в подпакет
+// добавьте комментарии
 @RestController
 @RequestMapping("/download")
-public class FileDownloadController {
+public class    FileDownloadController {
 
     private static final String EXTERNAL_FILE_PATH = "/tmp/";
 

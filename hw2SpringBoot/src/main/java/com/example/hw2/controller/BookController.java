@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+//TODO добавьте комментарии к каждому методу
+// используйте один Autowired на конструктор
 @Controller
 public class BookController {
 
