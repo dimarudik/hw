@@ -10,11 +10,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 // какие к авторизации
 // на всех слоях
 // включая html
+//     Done
 // также исправьте все варнинги
 // CustomErrorController 27,13
 // FileController 30,18
 // FileDownloadController 34,62
 // LoginController 41,30
+//     Done
 @SpringBootApplication
 public class Hw2Application {
 
