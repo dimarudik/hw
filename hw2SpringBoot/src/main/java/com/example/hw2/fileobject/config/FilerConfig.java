@@ -5,16 +5,14 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import static com.example.hw2.common.repository.Constants.*;
-//TODO добавьте комментарии
-// волшебные цифры вынесите в константы)
-//     Done
+
 @Configuration
 public class FilerConfig {
 
     @Bean
     public CommonsMultipartResolver multipartResolver() {
         CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
-        multipartResolver.setMaxUploadSize(FILEMAXSIZE);
+        multipartResolver.setMaxUploadSize(FILE_MAX_SIZE);
         return multipartResolver;
     }
 }

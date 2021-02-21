@@ -14,6 +14,4 @@ public class BookIdToRemove {
     public void setId(Long id) {
         this.id = id;
     }
-
-
 }

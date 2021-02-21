@@ -47,5 +47,4 @@ public class FileRepository implements IRepository<FileObject> {
     public boolean removeBySize(Integer size) {
         return false;
     }
-
 }

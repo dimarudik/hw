@@ -15,8 +15,6 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 
-//TODO добавьте комментарии к каждому методу
-//    Done
 @Controller
 public class FileUploadController {
 
@@ -55,5 +53,4 @@ public class FileUploadController {
         model.addAttribute("errorMessage", emptyFilenameException.getMessage());
         return "/error";
     }
-
 }

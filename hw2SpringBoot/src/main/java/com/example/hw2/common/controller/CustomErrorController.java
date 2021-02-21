@@ -15,9 +15,6 @@ import static com.example.hw2.common.repository.Constants.*;
 Сделано по примеру
 https://www.codejava.net/frameworks/spring-boot/spring-boot-error-handling-guide
 */
-//TODO добавьте комментарии (включая ссылку, описать)
-// строки сообщений в константы
-//    Done
 @Controller
 public class CustomErrorController implements ErrorController {
 
@@ -32,20 +29,19 @@ public class CustomErrorController implements ErrorController {
             int statusCode = Integer.parseInt(status.toString());
 
             if (statusCode == HttpStatus.NOT_FOUND.value()) {
-                model.addAttribute("errorMessage", M_PAGENOTFOUND);
+                model.addAttribute("errorMessage", M_PAGE_NOT_FOUND);
                 errorPage = "error/404";
 
             } else if (statusCode == HttpStatus.FORBIDDEN.value()) {
-                model.addAttribute("errorMessage", M_ACCESSDENIED);
+                model.addAttribute("errorMessage", M_ACCESS_DENIED);
                 errorPage = "error/403";
 
             } else if (statusCode == HttpStatus.INTERNAL_SERVER_ERROR.value()) {
-                model.addAttribute("errorMessage", M_SERVERERROR);
+                model.addAttribute("errorMessage", M_SERVER_ERROR);
                 errorPage = "error/500";
 
             }
         }
-
         return errorPage;
     }
 
@@ -54,5 +50,4 @@ public class CustomErrorController implements ErrorController {
     public String getErrorPath() {
         return "/error";
     }
-
 }

@@ -12,9 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-//TODO добавьте комментарии к каждому методу
-// используйте один Autowired на конструктор
-//    Done
 @Controller
 public class BookController {
 
@@ -29,7 +26,7 @@ public class BookController {
 
     // Страница магазина
     @GetMapping("/book")
-    public String bookPage(Model model){
+    public String bookPage(Model model) {
         model.addAttribute("book", new Book());
         model.addAttribute("bookList", bookService.getAll());
         model.addAttribute("bookIdToRemove", new BookIdToRemove());
@@ -41,7 +38,7 @@ public class BookController {
     // Добавить книгу
     @PostMapping("/save")
     public String saveBook(@Valid Book book, BindingResult bindingResult, Model model) {
-        if (bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             model.addAttribute("book", book);
             model.addAttribute("bookIdToRemove", new BookIdToRemove());
             model.addAttribute("searchBook", new Book());
@@ -56,7 +53,7 @@ public class BookController {
     // Удалить книгу по ID
     @PostMapping("/removeById")
     public String removeById(@Valid BookIdToRemove bookIdToRemove, BindingResult bindingResult, Model model) {
-        if (bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             model.addAttribute("book", new Book());
             model.addAttribute("bookList", bookService.getAll());
             model.addAttribute("bookIdToRemove", bookIdToRemove);
@@ -93,7 +90,7 @@ public class BookController {
 
     // Перехват исключения при вводе символов в поле количества страниц при удалении по числу страниц
     @ExceptionHandler(NumberFormatException.class)
-    public String handleNumberFormatException(Model model, NumberFormatException numberFormatException){
+    public String handleNumberFormatException(Model model, NumberFormatException numberFormatException) {
         model.addAttribute("errorMessage", numberFormatException.getMessage());
         return "/error";
     }
@@ -106,5 +103,4 @@ public class BookController {
         model.addAttribute("bookIdToRemove", new BookIdToRemove());
         return "book/book";
     }
-
 }

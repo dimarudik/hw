@@ -12,9 +12,6 @@ import java.net.URLConnection;
 
 import static com.example.hw2.common.repository.Constants.EXTERNAL_FILE_PATH;
 
-//TODO rest в подпакет
-// добавьте комментарии
-//    Done
 @RestController
 @RequestMapping("/download")
 public class    FileDownloadController {

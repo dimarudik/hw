@@ -14,7 +14,7 @@ public class BookRepository implements IRepository<Book> {
 
     @Override
     public Book store(Book book) {
-        if (  book.isValid() ) {
+        if (book.isValid()) {
             book.setId((long) book.hashCode());
             repo.add(book);
         } else {
@@ -31,7 +31,7 @@ public class BookRepository implements IRepository<Book> {
     @Override
     public boolean removeByAuthor(String author) {
         for (Book book : getAll()) {
-            if (book.getAuthor().equals(author)){
+            if (book.getAuthor().equals(author)) {
                 return repo.remove(book);
             }
         }
@@ -41,7 +41,7 @@ public class BookRepository implements IRepository<Book> {
     @Override
     public boolean removeByTitle(String title) {
         for (Book book : getAll()) {
-            if (book.getTitle().equals(title)){
+            if (book.getTitle().equals(title)) {
                 return repo.remove(book);
             }
         }
@@ -51,7 +51,7 @@ public class BookRepository implements IRepository<Book> {
     @Override
     public boolean removeBySize(Integer size) {
         for (Book book : getAll()) {
-            if (book.getSize().equals(size)){
+            if (book.getSize().equals(size)) {
                 return repo.remove(book);
             }
         }
@@ -72,5 +72,4 @@ public class BookRepository implements IRepository<Book> {
         }
         return null;
     }
-
 }

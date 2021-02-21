@@ -64,12 +64,11 @@ public class BookService implements IBookService<Book, BookIdToRemove> {
 
         if (book.getSize() != null) {
             books = books.stream()
-                    .filter(i -> i.getSize() == book.getSize())
+                    .filter(i -> i.getSize().equals(book.getSize()))
                     .collect(Collectors.toList());
         }
 
         return books;
 
     }
-
 }

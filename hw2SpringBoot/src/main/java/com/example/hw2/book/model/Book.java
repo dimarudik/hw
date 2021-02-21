@@ -46,7 +46,6 @@ public class Book {
     }
 
     public boolean isValid() {
-        return !( getAuthor().isEmpty() && getTitle().isEmpty() && getSize() == null );
+        return !(getAuthor().isEmpty() && getTitle().isEmpty() && getSize() == null);
     }
-
 }
