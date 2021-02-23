@@ -1,5 +1,6 @@
-package com.example.MyBookShopApp.data;
+package com.example.MyBookShopApp.service;
 
+import com.example.MyBookShopApp.data.Book;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
@@ -7,12 +8,11 @@ import org.springframework.stereotype.Service;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 @Service
 public class BookService {
 
-    private JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
 
     @Autowired
     public BookService(JdbcTemplate jdbcTemplate) {
@@ -25,9 +25,8 @@ public class BookService {
             book.setId(rs.getInt("id"));
             book.setAuthor(rs.getString("author"));
             book.setTitle(rs.getString("title"));
-            book.setPriceOld(rs.getString("priceold"));
+            book.setPriceOld(rs.getString("priceOld"));
             book.setPrice(rs.getString("price"));
-            //Logger.getLogger(BookService.class.getName()).info(book.getAuthor());
             return book;
         });
         return new ArrayList<>(books);
