@@ -71,15 +71,15 @@
             </div>
             <div class="row-block">
                 <ul class="menu menu_vt Footer-menu">
-                    <li class="menu-item"><a class="menu-link" href="/index.html">Главная</a>
+                    <li class="menu-item"><a class="menu-link" href="/index.html" th:text="#{topbar.main}">Главная</a>
                     </li>
-                    <li class="menu-item"><a class="menu-link" href="/genres/index.html">Жанры</a>
+                    <li class="menu-item"><a class="menu-link" href="/genres/index.html" th:text="#{topbar.genres}">Жанры</a>
                     </li>
-                    <li class="menu-item"><a class="menu-link" href="/books/recent.html">Новинки</a>
+                    <li class="menu-item"><a class="menu-link" href="/books/recent.html" th:text="#{topbar.news}">Новинки</a>
                     </li>
-                    <li class="menu-item"><a class="menu-link" href="/books/popular.html">Популярное</a>
+                    <li class="menu-item"><a class="menu-link" href="/books/popular.html" th:text="#{topbar.popular}">Популярное</a>
                     </li>
-                    <li class="menu-item"><a class="menu-link" href="/authors/index.html">Авторы</a>
+                    <li class="menu-item"><a class="menu-link" href="/authors/index.html" th:text="#{topbar.authors}">Авторы</a>
                     </li>
                 </ul>
             </div>
@@ -94,6 +94,14 @@
                     <li class="menu-item"><a class="menu-link" href="/faq.html">Помощь</a>
                     </li>
                     <li class="menu-item"><a class="menu-link" href="/contacts.html">Контакты</a>
+                    </li>
+                    <li class="menu-item">
+                        <span>Lang</span>
+                        <select id="locales">
+                            <option value=" "></option>
+                            <option value="en">English</option>
+                            <option value="ru">Russian</option>
+                        </select>
                     </li>
                 </ul>
             </div>
