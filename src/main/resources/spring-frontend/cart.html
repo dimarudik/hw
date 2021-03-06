@@ -9,7 +9,8 @@
 <!--[if IE 9]>
 <html class="ie9" lang="ru">
 <![endif]-->
-<!--[if gt IE 9]><!--> <html lang="ru"> <!--<![endif]-->
+<!--[if gt IE 9]><!-->
+<html lang="ru" xmlns:th="http://www.thymeleaf.org"> <!--<![endif]-->
 <head>
   <title>Тут название страницы написать</title>
   <meta name="description" content="Описание страницы">
@@ -39,6 +40,9 @@
           | браузера здесь&nbsp;
       | для правильного отображения сайта.
   -->
+  <header th:replace="~{fragments/header_fragment :: headFragment}"></header>
+
+<!--
   <header class="Header">
     <div class="Header-rowMain">
       <div class="wrap">
@@ -91,6 +95,7 @@
       </div>
     </div>
   </header>
+-->
   <div class="Middle">
     <div class="wrap">
       <main class="Middle-main">
