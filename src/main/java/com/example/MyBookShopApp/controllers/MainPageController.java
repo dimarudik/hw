@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -26,8 +27,9 @@ public class MainPageController {
     }
 
     @GetMapping("/")
-    public String mainPage(Model model){
+    public String mainPage(HttpServletRequest httpServletRequest, Model model){
         model.addAttribute("searchPlaceholder", "new search");
+        model.addAttribute("servletPath", httpServletRequest.getServletPath());
         return "index";
     }
 
