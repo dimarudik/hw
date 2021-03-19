@@ -1,75 +1,95 @@
 package com.example.MyBookShopApp.config;
 
-import com.example.MyBookShopApp.data.BookRepository;
-import com.example.MyBookShopApp.data.TestEntity;
-import com.example.MyBookShopApp.data.TestEntityCrudRepository;
-import com.example.MyBookShopApp.data.TestEntityDao;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
+import com.example.MyBookShopApp.comparators.BookTitleComparator;
+import com.example.MyBookShopApp.comparators.BookToAuthorAuthorNameComparator;
+import com.example.MyBookShopApp.comparators.BookToAuthorBookTitleComparator;
+import com.example.MyBookShopApp.data.Book;
+import com.example.MyBookShopApp.data.BookToGenre;
+import com.example.MyBookShopApp.data.BookToGenrePK;
+import com.example.MyBookShopApp.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 
-import javax.persistence.EntityManagerFactory;
 import java.util.logging.Logger;
 
+// Примеры работы с репозиториями
 @Configuration
 public class CommandLineRunnerImpl implements CommandLineRunner {
 
-    TestEntityCrudRepository testEntityCrudRepository;
-    BookRepository bookRepository;
+    private final Logger logger = Logger.getLogger(CommandLineRunnerImpl.class.getSimpleName());
+
+    private AuthorRepository authorRepository;
+    private final BookRepository bookRepository;
+    private final BookToAuthorRepository bookToAuthorRepository;
+    private final GenreRepository genreRepository;
+    private final BookToGenreRepository bookToGenreRepository;
 
     @Autowired
-    public CommandLineRunnerImpl(TestEntityCrudRepository testEntityCrudRepository, BookRepository bookRepository) {
-        this.testEntityCrudRepository = testEntityCrudRepository;
+    public CommandLineRunnerImpl(AuthorRepository authorRepository, BookRepository bookRepository, BookToAuthorRepository bookToAuthorRepository, GenreRepository genreRepository, BookToGenreRepository bookToGenreRepository) {
+        this.authorRepository = authorRepository;
         this.bookRepository = bookRepository;
+        this.bookToAuthorRepository = bookToAuthorRepository;
+        this.genreRepository = genreRepository;
+        this.bookToGenreRepository = bookToGenreRepository;
     }
+
+
 
     @Override
     public void run(String... args) throws Exception {
-        for (int i = 0; i < 5; i++) {
-            createTestEntity(new TestEntity());
-        }
 
-        TestEntity readTestEntity = readTestEntityById(3L);
-        if (readTestEntity != null){
-            Logger.getLogger(CommandLineRunnerImpl.class.getSimpleName()).info("read " +readTestEntity.toString());
-        }else {
-            throw new NullPointerException();
-        }
+        // Список книжек с авторами
+        bookToAuthorRepository
+                .findAll()
+                .stream()
+                .sorted(new BookToAuthorBookTitleComparator())
+                .forEach(i -> {
+                    logger.info( i.getBook().getTitle() + "  ( " + i.getAuthor().getName()+ " )");
+                });
 
-        TestEntity updatedTestEntity = updateTestEntityById(5L);
-        if (updatedTestEntity != null){
-            Logger.getLogger(CommandLineRunnerImpl.class.getSimpleName()).info("update "+updatedTestEntity.toString());
-        }else {
-            throw new NullPointerException();
-        }
+        // или
+        bookRepository
+                .findAll()
+                .stream()
+                .sorted(new BookTitleComparator())
+                .forEach(i -> {
+                    i.getBookToAuthors()
+                            .stream()
+                            .sorted(new BookToAuthorAuthorNameComparator())
+                            .forEach(j -> {
+                                logger.info(i.getTitle() + "  ( " + j.getAuthor().getName() + " )");
+                            });
+                });
 
-        deleteTesEntityById(4L);
+        // Список авторов с книжками
+        bookToAuthorRepository
+                .findAll()
+                .stream()
+                .sorted(new BookToAuthorAuthorNameComparator())
+                .forEach(i -> {
+                    logger.info(i.getAuthor().getName() + "  ( " + i.getBook().getTitle() + " )");
+                });
 
-        Logger.getLogger(CommandLineRunnerImpl.class.getSimpleName()).info(bookRepository.findBooksByAuthor_FirstName("Jelene").toString());
-        Logger.getLogger(CommandLineRunnerImpl.class.getSimpleName()).info(bookRepository.customFindAllBooks().toString());
+
+
+        // Проверяем, что персистится Embedded Entity
+        Book oldBook = bookRepository.findById(1).get();
+        Book newBook = new Book();
+        newBook.setPubDate(oldBook.getPubDate());
+        newBook.setIsBestseller(oldBook.getIsBestseller());
+        newBook.setSlug(oldBook.getSlug());
+        newBook.setTitle(oldBook.getTitle());
+        newBook.setPrice(oldBook.getPrice());
+        newBook.setDiscount(oldBook.getDiscount());
+        Book savedBook = bookRepository.save(newBook);
+
+        BookToGenre bookToGenre = new BookToGenre();
+        BookToGenrePK bookToGenrePK = new BookToGenrePK();
+        bookToGenrePK.setBook(savedBook);
+        bookToGenrePK.setGenre(genreRepository.findById(1).get());
+        bookToGenre.setBookToGenrePK(bookToGenrePK);
+        bookToGenreRepository.save(bookToGenre);
     }
 
-    private void deleteTesEntityById(Long id) {
-        TestEntity testEntity = testEntityCrudRepository.findById(id).get();
-        testEntityCrudRepository.delete(testEntity);
-    }
-
-    private TestEntity updateTestEntityById(Long id) {
-       TestEntity testEntity = testEntityCrudRepository.findById(id).get();
-       testEntity.setData("NEW DATA");
-       testEntityCrudRepository.save(testEntity);
-       return testEntity;
-    }
-
-    private TestEntity readTestEntityById(Long id) {
-        return testEntityCrudRepository.findById(id).get();
-    }
-
-    private void createTestEntity(TestEntity entity) {
-        entity.setData(entity.getClass().getSimpleName()+entity.hashCode());
-        testEntityCrudRepository.save(entity);
-    }
 }
