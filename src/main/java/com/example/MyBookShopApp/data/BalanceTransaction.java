@@ -4,24 +4,26 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "book_review_like")
-public class BookReviewLike {
+@Table(name = "balance_transaction")
+public class BalanceTransaction {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column(nullable = false)
     private Timestamp time;
-    @Column(nullable = false)
+    @Column(columnDefinition = "int default 0", nullable = false)
     private Integer value;
+    @Column(columnDefinition = "text", nullable = false)
+    private String description;
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "review_id", referencedColumnName = "id")
-    private BookReview bookReview;
+    @JoinColumn(name = "book_id", referencedColumnName = "id")
+    private Book book;
 
     public Integer getId() {
         return id;
@@ -47,6 +49,14 @@ public class BookReviewLike {
         this.value = value;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public User getUser() {
         return user;
     }
@@ -55,11 +65,11 @@ public class BookReviewLike {
         this.user = user;
     }
 
-    public BookReview getBookReview() {
-        return bookReview;
+    public Book getBook() {
+        return book;
     }
 
-    public void setBookReview(BookReview bookReview) {
-        this.bookReview = bookReview;
+    public void setBook(Book book) {
+        this.book = book;
     }
 }

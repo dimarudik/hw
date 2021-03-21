@@ -39,6 +39,18 @@ public class Book {
     @Fetch(value = FetchMode.SUBSELECT)
     private List<BookReview> bookReviews;
 
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "book")
+    @Fetch(value = FetchMode.SUBSELECT)
+    private List<BookToUser> bookToUsers;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "book")
+    @Fetch(value = FetchMode.SUBSELECT)
+    private List<BalanceTransaction> balanceTransactions;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "book")
+    @Fetch(value = FetchMode.SUBSELECT)
+    private List<FileDownload> fileDownloads;
+
     public Integer getId() {
         return id;
     }
@@ -133,5 +145,29 @@ public class Book {
 
     public void setBookReviews(List<BookReview> bookReviews) {
         this.bookReviews = bookReviews;
+    }
+
+    public List<BookToUser> getBookToUsers() {
+        return bookToUsers;
+    }
+
+    public void setBookToUsers(List<BookToUser> bookToUsers) {
+        this.bookToUsers = bookToUsers;
+    }
+
+    public List<BalanceTransaction> getBalanceTransactions() {
+        return balanceTransactions;
+    }
+
+    public void setBalanceTransactions(List<BalanceTransaction> balanceTransactions) {
+        this.balanceTransactions = balanceTransactions;
+    }
+
+    public List<FileDownload> getFileDownloads() {
+        return fileDownloads;
+    }
+
+    public void setFileDownloads(List<FileDownload> fileDownloads) {
+        this.fileDownloads = fileDownloads;
     }
 }

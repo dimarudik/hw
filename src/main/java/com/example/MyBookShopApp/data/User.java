@@ -30,6 +30,26 @@ public class User {
     @Fetch(value = FetchMode.SUBSELECT)
     private List<BookReviewLike> bookReviewLikes;
 
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+    @Fetch(value = FetchMode.SUBSELECT)
+    private List<UserContact> userContacts;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+    @Fetch(value = FetchMode.SUBSELECT)
+    private List<BookToUser> bookToUsers;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+    @Fetch(value = FetchMode.SUBSELECT)
+    private List<BalanceTransaction> balanceTransactions;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+    @Fetch(value = FetchMode.SUBSELECT)
+    private List<FileDownload> fileDownloads;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+    @Fetch(value = FetchMode.SUBSELECT)
+    private List<Message> messages;
+
     public Integer getId() {
         return id;
     }
@@ -84,5 +104,45 @@ public class User {
 
     public void setBookReviewLikes(List<BookReviewLike> bookReviewLikes) {
         this.bookReviewLikes = bookReviewLikes;
+    }
+
+    public List<UserContact> getUserContacts() {
+        return userContacts;
+    }
+
+    public void setUserContacts(List<UserContact> userContacts) {
+        this.userContacts = userContacts;
+    }
+
+    public List<BookToUser> getBookToUsers() {
+        return bookToUsers;
+    }
+
+    public void setBookToUsers(List<BookToUser> bookToUsers) {
+        this.bookToUsers = bookToUsers;
+    }
+
+    public List<BalanceTransaction> getBalanceTransactions() {
+        return balanceTransactions;
+    }
+
+    public void setBalanceTransactions(List<BalanceTransaction> balanceTransactions) {
+        this.balanceTransactions = balanceTransactions;
+    }
+
+    public List<FileDownload> getFileDownloads() {
+        return fileDownloads;
+    }
+
+    public void setFileDownloads(List<FileDownload> fileDownloads) {
+        this.fileDownloads = fileDownloads;
+    }
+
+    public List<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
     }
 }
