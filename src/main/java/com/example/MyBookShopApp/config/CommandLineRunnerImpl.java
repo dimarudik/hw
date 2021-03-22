@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.NoSuchElementException;
 import java.util.logging.Logger;
 
 // Примеры работы с репозиториями
@@ -24,21 +25,22 @@ public class CommandLineRunnerImpl implements CommandLineRunner {
     private final BookToAuthorRepository bookToAuthorRepository;
     private final GenreRepository genreRepository;
     private final BookToGenreRepository bookToGenreRepository;
+    private final BookRatingRepository bookRatingRepository;
 
     @Autowired
-    public CommandLineRunnerImpl(AuthorRepository authorRepository, BookRepository bookRepository, BookToAuthorRepository bookToAuthorRepository, GenreRepository genreRepository, BookToGenreRepository bookToGenreRepository) {
+    public CommandLineRunnerImpl(AuthorRepository authorRepository, BookRepository bookRepository, BookToAuthorRepository bookToAuthorRepository, GenreRepository genreRepository, BookToGenreRepository bookToGenreRepository, BookRatingRepository bookRatingRepository) {
         this.authorRepository = authorRepository;
         this.bookRepository = bookRepository;
         this.bookToAuthorRepository = bookToAuthorRepository;
         this.genreRepository = genreRepository;
         this.bookToGenreRepository = bookToGenreRepository;
+        this.bookRatingRepository = bookRatingRepository;
     }
-
-
 
     @Override
     public void run(String... args) throws Exception {
 
+/*
         // Список книжек с авторами
         bookToAuthorRepository
                 .findAll()
@@ -90,6 +92,29 @@ public class CommandLineRunnerImpl implements CommandLineRunner {
         bookToGenrePK.setGenre(genreRepository.findById(1).get());
         bookToGenre.setBookToGenrePK(bookToGenrePK);
         bookToGenreRepository.save(bookToGenre);
+
+        // Средний рейтинг книжки
+        try {
+            logger.info(bookRatingRepository.avgRatingByBook(bookRepository.findById(20).get().getId()) + "");
+        } catch (NoSuchElementException e) {
+            e.printStackTrace();
+        }
+
+        // Рекомендованные
+        bookRepository
+                .recommendedBooks()
+                .stream()
+                .sorted(new BookTitleComparator())
+                .forEach(i -> {
+                    logger.info(i.getTitle());
+                });
+
+        bookToAuthorRepository
+                .findByBook(bookRepository.findById(2).get())
+                .forEach(i -> {
+                    logger.info(i.getAuthor().getName());
+                });
+*/
     }
 
 }
