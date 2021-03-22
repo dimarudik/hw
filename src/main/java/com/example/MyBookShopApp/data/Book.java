@@ -51,6 +51,10 @@ public class Book {
     @Fetch(value = FetchMode.SUBSELECT)
     private List<FileDownload> fileDownloads;
 
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "book")
+    @Fetch(value = FetchMode.SUBSELECT)
+    private List<BookRating> bookRatings;
+
     public Integer getId() {
         return id;
     }
@@ -169,5 +173,13 @@ public class Book {
 
     public void setFileDownloads(List<FileDownload> fileDownloads) {
         this.fileDownloads = fileDownloads;
+    }
+
+    public List<BookRating> getBookRatings() {
+        return bookRatings;
+    }
+
+    public void setBookRatings(List<BookRating> bookRatings) {
+        this.bookRatings = bookRatings;
     }
 }

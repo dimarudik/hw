@@ -1784,4 +1784,28 @@ insert into MESSAGE (id, time, user_id, e_mail, name, subject, text) values (209
 insert into MESSAGE (id, time, user_id, e_mail, name, subject, text) values (210, '2020-12-30 18:25:10', 11, 'gkimble5t@is.gd', 'gshervington5t', 'odio cras mi pede malesuada in imperdiet et commodo vulputate justo in blandit ultrices', 'Duis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit. Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque. Duis bibendum. Morbi non quam nec dui luctus rutrum.');
 insert into MESSAGE (id, time, user_id, e_mail, name, subject, text) values (211, '2018-05-15 23:04:51', 17, 'pmatteini5u@ucoz.com', 'lweippert5u', 'dui vel sem sed sagittis nam congue risus semper porta volutpat quam pede', 'Nunc purus.');
 
+insert into BOOK_RATING (id, time, rating, book_id, user_id) values (1, '2020-11-23 04:55:07', 2, 17, 21);
+insert into BOOK_RATING (id, time, rating, book_id, user_id) values (2, '2018-04-04 13:39:53', 5, 25, 10);
+insert into BOOK_RATING (id, time, rating, book_id, user_id) values (3, '2019-07-12 09:17:55', 2, 52, 18);
+insert into BOOK_RATING (id, time, rating, book_id, user_id) values (4, '2020-11-11 21:36:44', 5, 65, 4);
+insert into BOOK_RATING (id, time, rating, book_id, user_id) values (5, '2018-10-08 00:26:54', 4, 45, 9);
+insert into BOOK_RATING (id, time, rating, book_id, user_id) values (6, '2019-06-15 08:03:45', 3, 30, 16);
+insert into BOOK_RATING (id, time, rating, book_id, user_id) values (7, '2018-11-24 07:17:09', 4, 51, 15);
+insert into BOOK_RATING (id, time, rating, book_id, user_id) values (8, '2020-08-17 19:30:02', 2, 37, 11);
+insert into BOOK_RATING (id, time, rating, book_id, user_id) values (9, '2019-03-20 09:21:46', 3, 50, 8);
+insert into BOOK_RATING (id, time, rating, book_id, user_id) values (10, '2020-07-30 05:54:33', 5, 24, 15);
+insert into BOOK_RATING (id, time, rating, book_id, user_id) values (11, '2018-12-01 00:20:59', 2, 50, 6);
+insert into BOOK_RATING (id, time, rating, book_id, user_id) values (12, '2020-12-19 18:42:45', 3, 65, 2);
+insert into BOOK_RATING (id, time, rating, book_id, user_id) values (13, '2019-11-12 18:59:27', 2, 53, 4);
+insert into BOOK_RATING (id, time, rating, book_id, user_id) values (14, '2018-08-30 17:55:25', 3, 27, 3);
+insert into BOOK_RATING (id, time, rating, book_id, user_id) values (15, '2019-03-23 17:09:19', 2, 60, 12);
+insert into BOOK_RATING (id, time, rating, book_id, user_id) values (16, '2020-04-11 00:55:18', 2, 48, 4);
+insert into BOOK_RATING (id, time, rating, book_id, user_id) values (17, '2020-03-25 17:33:42', 2, 20, 14);
+insert into BOOK_RATING (id, time, rating, book_id, user_id) values (18, '2019-08-30 11:26:50', 1, 8, 7);
+insert into BOOK_RATING (id, time, rating, book_id, user_id) values (19, '2018-03-30 20:37:13', 4, 17, 8);
+insert into BOOK_RATING (id, time, rating, book_id, user_id) values (20, '2019-09-19 18:52:54', 5, 41, 6);
+insert into BOOK_RATING (id, time, rating, book_id, user_id) values (21, '2019-11-27 07:37:12', 4, 40, 13);
+insert into BOOK_RATING (id, time, rating, book_id, user_id) values (22, '2020-12-28 23:01:36', 4, 45, 11);
+insert into BOOK_RATING (id, time, rating, book_id, user_id) values (23, '2019-07-01 19:46:25', 4, 33, 3);
+
 SELECT setval('public.book_id_seq', 67, true);

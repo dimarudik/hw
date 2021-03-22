@@ -50,6 +50,10 @@ public class User {
     @Fetch(value = FetchMode.SUBSELECT)
     private List<Message> messages;
 
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+    @Fetch(value = FetchMode.SUBSELECT)
+    private List<BookRating> bookRatings;
+
     public Integer getId() {
         return id;
     }
@@ -144,5 +148,13 @@ public class User {
 
     public void setMessages(List<Message> messages) {
         this.messages = messages;
+    }
+
+    public List<BookRating> getBookRatings() {
+        return bookRatings;
+    }
+
+    public void setBookRatings(List<BookRating> bookRatings) {
+        this.bookRatings = bookRatings;
     }
 }
