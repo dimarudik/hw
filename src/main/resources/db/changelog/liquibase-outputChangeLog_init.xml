@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet author="d.rudik (generated)" id="1616568430681-1">
+        <createSequence sequenceName="author_id_seq"/>
+    </changeSet>
+    <changeSet author="d.rudik (generated)" id="1616568430681-2">
+        <createSequence sequenceName="balance_transaction_id_seq"/>
+    </changeSet>
+    <changeSet author="d.rudik (generated)" id="1616568430681-3">
+        <createSequence sequenceName="book2author_id_seq"/>
+    </changeSet>
+    <changeSet author="d.rudik (generated)" id="1616568430681-4">
+        <createSequence sequenceName="book2user_id_seq"/>
+    </changeSet>
+    <changeSet author="d.rudik (generated)" id="1616568430681-5">
+        <createSequence sequenceName="book2user_type_id_seq"/>
+    </changeSet>
+    <changeSet author="d.rudik (generated)" id="1616568430681-6">
+        <createSequence sequenceName="book_file_type_id_seq"/>
+    </changeSet>
+    <changeSet author="d.rudik (generated)" id="1616568430681-7">
+        <createSequence sequenceName="book_id_seq"/>
+    </changeSet>
+    <changeSet author="d.rudik (generated)" id="1616568430681-8">
+        <createSequence sequenceName="book_rating_id_seq"/>
+    </changeSet>
+    <changeSet author="d.rudik (generated)" id="1616568430681-9">
+        <createSequence sequenceName="book_review_id_seq"/>
+    </changeSet>
+    <changeSet author="d.rudik (generated)" id="1616568430681-10">
+        <createSequence sequenceName="book_review_like_id_seq"/>
+    </changeSet>
+    <changeSet author="d.rudik (generated)" id="1616568430681-11">
+        <createSequence sequenceName="document_id_seq"/>
+    </changeSet>
+    <changeSet author="d.rudik (generated)" id="1616568430681-12">
+        <createSequence sequenceName="faq_id_seq"/>
+    </changeSet>
+    <changeSet author="d.rudik (generated)" id="1616568430681-13">
+        <createSequence sequenceName="file_download_id_seq"/>
+    </changeSet>
+    <changeSet author="d.rudik (generated)" id="1616568430681-14">
+        <createSequence sequenceName="genre_id_seq"/>
+    </changeSet>
+    <changeSet author="d.rudik (generated)" id="1616568430681-15">
+        <createSequence sequenceName="message_id_seq"/>
+    </changeSet>
+    <changeSet author="d.rudik (generated)" id="1616568430681-16">
+        <createSequence sequenceName="user_contact_id_seq"/>
+    </changeSet>
+    <changeSet author="d.rudik (generated)" id="1616568430681-17">
+        <createSequence sequenceName="user_id_seq"/>
+    </changeSet>
+    <changeSet author="d.rudik (generated)" id="1616568430681-18">
+        <createTable tableName="author">
+            <column autoIncrement="true" name="id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="author_pkey"/>
+            </column>
+            <column name="description" type="TEXT"/>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="photo" type="VARCHAR(255)"/>
+            <column name="slug" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="d.rudik (generated)" id="1616568430681-19">
+        <createTable tableName="balance_transaction">
+            <column autoIncrement="true" name="id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="balance_transaction_pkey"/>
+            </column>
+            <column name="description" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="time" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="value" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="book_id" type="INT"/>
+            <column name="user_id" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="d.rudik (generated)" id="1616568430681-20">
+        <createTable tableName="book">
+            <column autoIncrement="true" name="id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="book_pkey"/>
+            </column>
+            <column name="description" type="TEXT"/>
+            <column defaultValueNumeric="0" name="discount" type="SMALLINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="image" type="VARCHAR(255)"/>
+            <column name="is_bestseller" type="SMALLINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="price" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="price_old" type="VARCHAR(255)"/>
+            <column name="pub_date" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="slug" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="title" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="d.rudik (generated)" id="1616568430681-21">
+        <createTable tableName="book2author">
+            <column autoIncrement="true" name="id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="book2author_pkey"/>
+            </column>
+            <column defaultValueNumeric="0" name="sort_index" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="author_id" type="INT"/>
+            <column name="book_id" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="d.rudik (generated)" id="1616568430681-22">
+        <createTable tableName="book2genre">
+            <column name="genre_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="book_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="d.rudik (generated)" id="1616568430681-23">
+        <createTable tableName="book2user">
+            <column autoIncrement="true" name="id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="book2user_pkey"/>
+            </column>
+            <column name="time" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="book_id" type="INT"/>
+            <column name="type_id" type="INT"/>
+            <column name="user_id" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="d.rudik (generated)" id="1616568430681-24">
+        <createTable tableName="book2user_type">
+            <column autoIncrement="true" name="id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="book2user_type_pkey"/>
+            </column>
+            <column name="code" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="d.rudik (generated)" id="1616568430681-25">
+        <createTable tableName="book_file_type">
+            <column autoIncrement="true" name="id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="book_file_type_pkey"/>
+            </column>
+            <column name="description" type="TEXT"/>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="d.rudik (generated)" id="1616568430681-26">
+        <createTable tableName="book_rating">
+            <column autoIncrement="true" name="id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="book_rating_pkey"/>
+            </column>
+            <column name="rating" type="SMALLINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="time" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="book_id" type="INT"/>
+            <column name="user_id" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="d.rudik (generated)" id="1616568430681-27">
+        <createTable tableName="book_review">
+            <column autoIncrement="true" name="id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="book_review_pkey"/>
+            </column>
+            <column name="text" type="TEXT"/>
+            <column name="time" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="book_id" type="INT"/>
+            <column name="user_id" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="d.rudik (generated)" id="1616568430681-28">
+        <createTable tableName="book_review_like">
+            <column autoIncrement="true" name="id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="book_review_like_pkey"/>
+            </column>
+            <column name="time" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="value" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="review_id" type="INT"/>
+            <column name="user_id" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="d.rudik (generated)" id="1616568430681-29">
+        <createTable tableName="document">
+            <column autoIncrement="true" name="id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="document_pkey"/>
+            </column>
+            <column name="slug" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="sort_index" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="text" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="title" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="d.rudik (generated)" id="1616568430681-30">
+        <createTable tableName="faq">
+            <column autoIncrement="true" name="id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="faq_pkey"/>
+            </column>
+            <column name="answer" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="question" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="sort_index" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="d.rudik (generated)" id="1616568430681-31">
+        <createTable tableName="file_download">
+            <column autoIncrement="true" name="id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="file_download_pkey"/>
+            </column>
+            <column defaultValueNumeric="1" name="count" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="book_id" type="INT"/>
+            <column name="user_id" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="d.rudik (generated)" id="1616568430681-32">
+        <createTable tableName="genre">
+            <column autoIncrement="true" name="id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="genre_pkey"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="parent_id" type="INT"/>
+            <column name="slug" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="d.rudik (generated)" id="1616568430681-33">
+        <createTable tableName="message">
+            <column autoIncrement="true" name="id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="message_pkey"/>
+            </column>
+            <column name="e_mail" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="subject" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="text" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="time" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="d.rudik (generated)" id="1616568430681-34">
+        <createTable tableName="user">
+            <column autoIncrement="true" name="id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="user_pkey"/>
+            </column>
+            <column defaultValueNumeric="0" name="balance" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="hash" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="reg_time" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="d.rudik (generated)" id="1616568430681-35">
+        <createTable tableName="user_contact">
+            <column autoIncrement="true" name="id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="user_contact_pkey"/>
+            </column>
+            <column name="approved" type="INT"/>
+            <column name="code" type="VARCHAR(255)"/>
+            <column name="code_time" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="code_trails" type="INT"/>
+            <column name="contact" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type" type="VARCHAR(255)"/>
+            <column name="user_id" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="d.rudik (generated)" id="1616568430681-36">
+        <addPrimaryKey columnNames="book_id, genre_id" constraintName="book2genre_pkey" tableName="book2genre"/>
+    </changeSet>
+    <changeSet author="d.rudik (generated)" id="1616568430681-37">
+        <addForeignKeyConstraint baseColumnNames="book_id" baseTableName="book_review" constraintName="fk29oatdl4f30mtg65oxo1nkmjg" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="book"/>
+    </changeSet>
+    <changeSet author="d.rudik (generated)" id="1616568430681-38">
+        <addForeignKeyConstraint baseColumnNames="book_id" baseTableName="book_rating" constraintName="fk5o8hnchc5tpupntaqau4ermh3" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="book"/>
+    </changeSet>
+    <changeSet author="d.rudik (generated)" id="1616568430681-39">
+        <addForeignKeyConstraint baseColumnNames="book_id" baseTableName="book2user" constraintName="fk7cv34daf9pi5ie147slv010b3" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="book"/>
+    </changeSet>
+    <changeSet author="d.rudik (generated)" id="1616568430681-40">
+        <addForeignKeyConstraint baseColumnNames="book_id" baseTableName="book2author" constraintName="fkafij5snytuqywyya5gj5r30l3" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="book"/>
+    </changeSet>
+    <changeSet author="d.rudik (generated)" id="1616568430681-41">
+        <addForeignKeyConstraint baseColumnNames="author_id" baseTableName="book2author" constraintName="fkcdamvjmc66dxs94gpco2g5yyb" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="author"/>
+    </changeSet>
+    <changeSet author="d.rudik (generated)" id="1616568430681-42">
+        <addForeignKeyConstraint baseColumnNames="book_id" baseTableName="file_download" constraintName="fkckyk51qg1y0buyh6pe7uwcw8w" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="book"/>
+    </changeSet>
+    <changeSet author="d.rudik (generated)" id="1616568430681-43">
+        <addForeignKeyConstraint baseColumnNames="book_id" baseTableName="book2genre" constraintName="fkdyiaf682r8d022a3gi1q16ypw" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="book"/>
+    </changeSet>
+    <changeSet author="d.rudik (generated)" id="1616568430681-44">
+        <addForeignKeyConstraint baseColumnNames="book_id" baseTableName="balance_transaction" constraintName="fkfmqooydnad6dlf5jjhx1mmqft" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="book"/>
+    </changeSet>
+    <changeSet author="d.rudik (generated)" id="1616568430681-45">
+        <addForeignKeyConstraint baseColumnNames="type_id" baseTableName="book2user" constraintName="fkgshsph8qmeq54ntxrfcodb94" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="book2user_type"/>
+    </changeSet>
+    <changeSet author="d.rudik (generated)" id="1616568430681-46">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="book_rating" constraintName="fkh4jswlmxnosst4maoi0deb94b" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user"/>
+    </changeSet>
+    <changeSet author="d.rudik (generated)" id="1616568430681-47">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="book_review_like" constraintName="fkisbelvuakm1lobitbfthwkqtv" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user"/>
+    </changeSet>
+    <changeSet author="d.rudik (generated)" id="1616568430681-48">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="book_review" constraintName="fkk9etm8t04ieb7bul8hp4w48ls" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user"/>
+    </changeSet>
+    <changeSet author="d.rudik (generated)" id="1616568430681-49">
+        <addForeignKeyConstraint baseColumnNames="genre_id" baseTableName="book2genre" constraintName="fkkdc8kcprnkl4ygg2f0v9588wi" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="genre"/>
+    </changeSet>
+    <changeSet author="d.rudik (generated)" id="1616568430681-50">
+        <addForeignKeyConstraint baseColumnNames="review_id" baseTableName="book_review_like" constraintName="fkl5konyr7ye2i76wv92vf9w6y2" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="book_review"/>
+    </changeSet>
+    <changeSet author="d.rudik (generated)" id="1616568430681-51">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="balance_transaction" constraintName="fkmubymvjt4ghwvw2q5te4mk84y" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user"/>
+    </changeSet>
+    <changeSet author="d.rudik (generated)" id="1616568430681-52">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="user_contact" constraintName="fkn753n06mhq11y9howq2pmkaaq" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user"/>
+    </changeSet>
+    <changeSet author="d.rudik (generated)" id="1616568430681-53">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="message" constraintName="fknebwitbhvl9nq6mqsdlmb0v75" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user"/>
+    </changeSet>
+    <changeSet author="d.rudik (generated)" id="1616568430681-54">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="book2user" constraintName="fkpk61kejp1qc9bb0fvcjsvgvel" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user"/>
+    </changeSet>
+    <changeSet author="d.rudik (generated)" id="1616568430681-55">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="file_download" constraintName="fky9um7wojg6xslv61ok1cfeee" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user"/>
+    </changeSet>
+</databaseChangeLog>

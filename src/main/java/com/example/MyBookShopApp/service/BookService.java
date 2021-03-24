@@ -30,17 +30,10 @@ public class BookService {
         return bookRepository.findAll();
     }
 
-/*
-    public List<Book> recommendedBooks(){
-        return bookRepository.recommendedBooks();
-    }
-*/
-
     public Map<Book, Author> recommendedBooks(){
         List<Book> recommendedBooks = bookRepository.recommendedBooks();
         Map<Book, Author> authorBookMap = new HashMap<>();
         recommendedBooks.forEach(i -> {
-            //logger.info(i.getId().toString());
             authorBookMap.put(i, bookToAuthorRepository
                     .findByBook(i)
                     .stream()

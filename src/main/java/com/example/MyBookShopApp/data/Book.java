@@ -35,6 +35,7 @@ public class Book {
     @Fetch(value = FetchMode.SUBSELECT)
     private List<BookToAuthor> bookToAuthors;
 
+/*
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "book")
     @Fetch(value = FetchMode.SUBSELECT)
     private List<BookReview> bookReviews;
@@ -54,6 +55,7 @@ public class Book {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "book")
     @Fetch(value = FetchMode.SUBSELECT)
     private List<BookRating> bookRatings;
+*/
 
     public Integer getId() {
         return id;
@@ -143,6 +145,7 @@ public class Book {
         this.bookToAuthors = bookToAuthors;
     }
 
+/*
     public List<BookReview> getBookReviews() {
         return bookReviews;
     }
@@ -182,4 +185,5 @@ public class Book {
     public void setBookRatings(List<BookRating> bookRatings) {
         this.bookRatings = bookRatings;
     }
+*/
 }
