@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 @Service
 public class AuthorService {
 
-    private JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
 
     @Autowired
     public AuthorService(JdbcTemplate jdbcTemplate) {
@@ -31,4 +31,5 @@ public class AuthorService {
 
         return authors.stream().collect(Collectors.groupingBy((Author a) -> {return a.getLastName().substring(0,1);}));
     }
+
 }
