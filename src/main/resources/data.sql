@@ -2186,3 +2186,17 @@ insert into BOOK_RATING (id, time, rating, book_id, user_id) values (357, '2020-
 insert into BOOK_RATING (id, time, rating, book_id, user_id) values (358, '2018-08-22 20:45:53', 3, 45, 15);
 
 SELECT setval('public.book_id_seq', 67, true);
+
+/*
+CREATE OR REPLACE FUNCTION get_author_name_by_book_id(book_id integer)
+RETURNS character varying(255)
+AS
+$$
+	select case when b.c = 1 then a.name else a.name||' and others...' end as author
+	from author a,
+	(select author_id, (select count(1) c from book2author b2a where b2a.book_id = $1 limit 2)
+	from book2author b2a where book_id = $1 limit 1) b
+	where a.id = b.author_id;
+$$
+LANGUAGE SQL IMMUTABLE STRICT;
+*/

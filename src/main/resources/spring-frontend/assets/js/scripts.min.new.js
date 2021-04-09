@@ -2035,7 +2035,7 @@
                         if (pageSearch) {
                             function getData(address, data) {
                                 $.ajax({
-                                    url: address,
+                                    url: 'https://virtserver.swaggerhub.com/lunpully/bookshop/1.0.0' + address,
                                     type: 'GET',
                                     dataType: 'json',
                                     data: data,
@@ -2056,7 +2056,7 @@
                                         }
                                     }
                                 });
-                            };getData('/search/page/' + $this.find('.search-input').val(), {
+                            };getData('/search/' + $this.find('.search-input').val(), {
                                 offset: 0,
                                 limit: $this.data('searchlimit')
                             });
@@ -2108,7 +2108,7 @@
                         function getData(address, data, type) {
                             var scroll = $(window).scrollTop();
                             $.ajax({
-                                url: address,
+                                url: 'https://virtserver.swaggerhub.com/lunpully/bookshop/1.0.0' + address,
                                 type: 'GET',
                                 dataType: 'json',
                                 data: data,
@@ -2194,16 +2194,8 @@
                                 });
                                 break;
                             case'search':
-                                getData('/search/page/' + $this.data('refreshquery'), {
-                                    offset: function () {
-                                        var oldOffset = $this.data('refreshoffset');
-                                        if(oldOffset < 1){
-                                            $this.data('refreshoffset', ++oldOffset);
-                                        }else{
-                                            $this.data('refreshoffset', ++oldOffset - $this.data('refreshlimit'));
-                                        }
-                                        return $this.data('refreshoffset');
-                                    },
+                                getData('/search/' + $this.data('refreshquery'), {
+                                    offset: $this.data('refreshoffset'),
                                     limit: $this.data('refreshlimit')
                                 });
                                 break;
@@ -2276,7 +2268,7 @@
                         }
                         ;data.reviewid = $this.data('likeid');
                         Login().postData('/rateBookReview', data, function (result) {
-                            if (result.result) {
+                            if (result != null && result.result) {
                                 if ($this.data('btnradio')) {
                                     $('[data-btnradio="' + $this.data('btnradio') + '"]').each(function (e) {
                                         if ($(this).data('check') && !$(this).is($this)) {
@@ -2290,6 +2282,8 @@
                                     $this.find('.btn-content').text(parseFloat($this.text()) + 1);
                                 }
                                 ProductCard().shiftCheck($this);
+                            } else {
+                                $("#err_dialog").dialog();
                             }
                         });
                     });
@@ -2363,7 +2357,7 @@
 
             function postData(address, data, cb, cbErr) {
                 $.ajax({
-                    url: address,
+                    url: 'https://virtserver.swaggerhub.com/lunpully/bookshop/1.0.0' + address,
                     type: 'POST',
                     dataType: 'json',
                     data: data,
@@ -2990,7 +2984,9 @@
                         s = 0 === o ? r.options.slidesToScroll : r.options.slidesToShow - o, r.slideCount > r.options.slidesToShow && r.slideHandler(r.currentSlide - s, !1, t);
                         break;
                     case"next":
-                        s = 0 === o ? r.options.slidesToScroll : o, r.slideCount > r.options.slidesToShow && r.slideHandler(r.currentSlide + s, !1, t);
+                        if(l.prevObject[0].className == "slick-next slick-arrow") {
+                            s = 0 === o ? r.options.slidesToScroll : o, r.slideCount > r.options.slidesToShow && r.slideHandler(r.currentSlide + s, !1, t);
+                        }
                         break;
                     case"index":
                         var d = 0 === e.data.index ? 0 : e.data.index || l.index() * r.options.slidesToScroll;
@@ -3363,7 +3359,7 @@
                 init: function () {
                     function getData(address, data, cb) {
                         $.ajax({
-                            url: address,
+                            url: 'https://virtserver.swaggerhub.com/lunpully/bookshop/1.0.0' + address,
                             type: 'GET',
                             dataType: 'json',
                             async: true,
@@ -3415,16 +3411,10 @@
 
                                         function sendData(address) {
                                             getData(address, {
-                                                offset: function () {
-                                                    var oldOffset = $(slick.$slider).data('loadoffset');
-                                                    $(slick.$slider).data('loadoffset', ++oldOffset);
-                                                    return $(slick.$slider).data('loadoffset');
-                                                },
+                                                offset: $(slick.$slider).data('loadoffset'),
                                                 limit: $(slick.$slider).data('loadlimit')
                                             }, function (result) {
-                                                /*alert(result.books.length);*/
                                                 result.books.forEach(function (v, i) {
-                                                    /*alert(v);*/
                                                     $this.slick('slickAdd', '<div class="Slider-item"><div class="Slider-content">' + Card().bookTemplate(v) + '</div></div>');
                                                     if (i === (result.books.length - 1)) {
                                                         $(slick.$slider).closest('.Slider').removeClass('Slider_load');
@@ -3437,7 +3427,7 @@
                                         };
                                         switch ($(slick.$slider).data('load')) {
                                             case'recommended':
-                                                sendData('/books/recommended')
+                                                sendData('/books/recommended')r
                                                 break;
                                             case'recent':
                                                 sendData('/books/recent')
@@ -3592,7 +3582,7 @@
             function getData(address, data) {
                 var scroll = $(window).scrollTop();
                 $.ajax({
-                    url: address,
+                    url: 'https://virtserver.swaggerhub.com/lunpully/bookshop/1.0.0' + address,
                     type: 'GET',
                     dataType: 'json',
                     data: data,

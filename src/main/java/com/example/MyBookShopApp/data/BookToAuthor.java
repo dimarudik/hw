@@ -1,6 +1,7 @@
 package com.example.MyBookShopApp.data;
 
 import javax.persistence.*;
+import com.example.MyBookShopApp.data.Author;
 
 @Entity
 @Table(name = "book2author")

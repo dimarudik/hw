@@ -1,5 +1,6 @@
 package com.example.MyBookShopApp.repository;
 
+
 import com.example.MyBookShopApp.data.Book;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -33,14 +34,28 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
 
     Page<Book> findBookByTitleContaining(String bookTitle, Pageable nextPage);
 
-    @Query(value = "select \n" +
-            "b.* \n" +
-            "from \n" +
-            "book b\n" +
-            "where\n" +
-            "4 < (select avg(rating) from book_rating br where b.id = br.book_id) OR\n" +
-            "pub_date >= current_date - 365\n"
+    @Query(value =  "select \n" +
+                    //"b.* \n" +
+                    "b.id,\n" +
+                    "b.description,\n" +
+                    "b.discount,\n" +
+                    "b.image,\n" +
+                    "b.is_bestseller,\n" +
+                    "b.price,\n" +
+                    "b.price_old,\n" +
+                    "b.pub_date,\n" +
+                    "b.slug,\n" +
+                    "b.title \n" +
+                    ", get_author_name_by_book_id(b.id) author \n" +
+                    "from \n" +
+                    "book b \n" +
+                    "where \n" +
+                    "-- Books with rating more than 4 and published last year\n" +
+                    "4 < (select avg(rating) from book_rating br where b.id = br.book_id) OR pub_date >= current_date - 365\n"
             , nativeQuery = true)
-    List<Book> recommendedBooks();
+    Page<Book> getPageOfRecommendedBooks(Pageable pageable);
+
+    @Query(value = "select get_author_name_by_book_id(?)", nativeQuery = true)
+    String getAuthorNameByBookId(Integer book_id);
 
 }
