@@ -28,7 +28,9 @@ public class MainPageController {
 
     @ModelAttribute("recommendedBooks")
     public List<Book> recommendedBooks() {
-        return bookService.getPageOfRecommendedBooks(0, 6).getContent();
+        List<Book> books = bookService.getPageOfRecommendedBooks(0, 6).getContent();
+        books.forEach(i -> logger.info(i.getTitle()));
+        return books;
     }
 
     @ModelAttribute("searchWordDto")
@@ -52,27 +54,6 @@ public class MainPageController {
                                      @RequestParam("limit") Integer limit) {
         return new BooksPageDto(bookService.getPageOfRecommendedBooks(offset, limit).getContent());
     }
-
-/*
-    @GetMapping("/books/recommended")
-    @ResponseBody
-    public BooksPageDto getBooksPage(@RequestParam("offset") Integer offset,
-                                     @RequestParam("limit") Integer limit) {
-        Page<Book> books = bookService.getPageOfRecommendedBooks(offset, limit);
-        BooksPageDto booksPageDto = new BooksPageDto(books.getContent());
-        //logger.info(books.toString());
-*/
-/*
-        booksPageDto
-                .getBooks()
-                .forEach(i -> {
-                    logger.info(i.getAuthor().getFirstName() + " " + i.getAuthor().getLastName());
-                });
-*//*
-
-        return booksPageDto;
-    }
-*/
 
     @GetMapping(value = {"/search", "/search/{searchWord}"})
     public String getSearchResults(@PathVariable(value = "searchWord", required = false) SearchWordDto searchWordDto,
